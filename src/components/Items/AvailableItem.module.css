@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    list-style: none;
+    grid-template-columns: auto auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.container-items {
+    display: block;
+    align-items: center;
+}
