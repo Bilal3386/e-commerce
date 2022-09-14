@@ -1,0 +1,7 @@
+.footer-container {
+  display: flex;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

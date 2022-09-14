@@ -1,22 +1,32 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import Cart from './components/Cart/Cart'
 import AvailableItem from "./components/Items/AvailableItem";
+import Header from "./components/Layout/Header";
+import Footer from './components/Layout/Footer'
+import classes from './App.module.css'
 
 function App() {
+  const [showCart, setShowCart] = useState(false)
+
+  const showCartHandler = () => {
+    setShowCart(true);
+  }
+
+  const hiddenCartHandler = () => 
+  {
+    setShowCart(false)
+  }
+
   return (
     <Fragment>
-      <section>
-        <header>
-          <h1>The Generics</h1>
-        </header>
-      </section>
+    {showCart && <Cart onClose = {hiddenCartHandler}/>}
+    <Header onShowCart={showCartHandler} />
       <main>
         <AvailableItem />
       </main>
-      <section>
-        <footer>
-          <h1>The Generics</h1>
-        </footer>
-      </section>
+      <div className={classes['footer-container']}>
+     <Footer />
+     </div>
     </Fragment>
   );
 }
