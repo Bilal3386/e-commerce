@@ -1,0 +1,34 @@
+
+.about {
+  /* max-width: 100%;
+  margin: 0 auto;
+  font-size: 22px; */
+  display: block;
+}
+
+.about h2 {
+  font-family: "Metal Mania";
+  text-align: center;
+}
+
+.wrapper {
+  padding: 0 20%;
+  justify-content: center;
+}
+
+.wrapper img {
+  float: left;
+  margin: 5px 20px 0 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.wrapper p:first-of-type::first-letter {
+  font-size: 17px;
+  font-family: "Gentium Book Basic", serif;
+  margin: 20px;
+  color: #777;
+  text-align: justify;
+}
+
