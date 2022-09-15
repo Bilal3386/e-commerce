@@ -9,10 +9,10 @@ const CartItems = (props) => {
     console.log(le)
   }
   return (
-    <li>
+    <li key={props.product.id}>
       <div className={classes.container}>
         <div className={classes['cart-column']}>
-          <img src={props.product.imageUrl} alt="Cart items" />
+          <img src={props.product.imageUrl} alt="Cart items"/>
           <span>{props.product.title}</span>
         </div>
         <span className={classes.price}>{price}</span>

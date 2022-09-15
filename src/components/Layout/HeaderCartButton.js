@@ -1,11 +1,22 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
+import CartContext from "../../Store/cart-context";
 import classes from "./HeaderCartButton.module.css";
 
 const HeaderCartButton = props => {
+  const cartCtx = useContext(CartContext)
+
+  let quantity = 0 
+  cartCtx.items.forEach(item => 
+    {
+      quantity=quantity+ Number(item.quantity)
+    }
+  )
+
+
   return (
     <Fragment>
       <button className={classes.button} onClick={props.onClick}>
-        Cart <span className={classes.span}>0</span>
+        Cart <span className={classes.span}>{quantity}</span>
       </button>
     </Fragment>
   );

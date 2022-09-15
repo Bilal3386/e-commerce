@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import Cart from './components/Cart/Cart'
 import AvailableItem from "./components/Items/AvailableItem";
 import Header from "./components/Layout/Header";
 import Footer from './components/Layout/Footer'
 import classes from './App.module.css'
+import CartProvider from "./Store/CartProvider";
 
 function App() {
   const [showCart, setShowCart] = useState(false)
@@ -18,7 +19,7 @@ function App() {
   }
 
   return (
-    <Fragment>
+    <CartProvider>
     {showCart && <Cart onClose = {hiddenCartHandler}/>}
     <Header onShowCart={showCartHandler} />
       <main>
@@ -27,7 +28,7 @@ function App() {
       <div className={classes['footer-container']}>
      <Footer />
      </div>
-    </Fragment>
+    </CartProvider>
   );
 }
 
