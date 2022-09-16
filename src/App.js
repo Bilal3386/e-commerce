@@ -7,9 +7,11 @@ import Footer from "./components/Layout/Footer";
 import classes from "./App.module.css";
 import CartProvider from "./store/CartProvider";
 import About from "./pages/About";
+import Home from './pages/Home'
 
 function App() {
   const [showCart, setShowCart] = useState(false);
+  
 
   const showCartHandler = () => {
     setShowCart(true);
@@ -25,7 +27,10 @@ function App() {
       <Header onShowCart={showCartHandler} />
       <main>
         <Route path="/home">
-          <AvailableItem />
+          <Home />
+        </Route>
+        <Route path='/store'>
+        <AvailableItem />
         </Route>
         <Route path="/about">
           <About />
