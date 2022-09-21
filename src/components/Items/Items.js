@@ -1,31 +1,34 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import CartContext from "../../store/cart-context";
 import Button from "../UI/Button";
 import classes from "./Items.module.css";
 
 const Items = (props) => {
-
-  const cartCtx = useContext(CartContext)
+  const cartCtx = useContext(CartContext);
 
   const price = `$${props.data.price}`;
 
   const addItemHandler = () => {
-    cartCtx.addItem({...props.data, quantity: 1})
-  }
-
+    cartCtx.addItem({ ...props.data, quantity: 1 });
+  };
 
   return (
     <li key={props.data.id} id={props.id}>
-      <div className={classes.container}>
-        <div>
-          <h3>{props.data.title}</h3>
-          <img src={props.data.imageUrl} alt="items images " />
+      <Link style={{ textDecoration: 'none' }}
+        to={{ pathname: "store/productDetails", state: { data: props.data} }}
+      >
+        <div className={classes.container}>
+          <div>
+            <h3>{props.data.title}</h3>
+            <img src={props.data.imageUrl} alt="items images " />
+          </div>
+          <div className={classes.wrapper}>
+            <span>{price}</span>
+            <Button onClick={addItemHandler}>Add TO CART</Button>
+          </div>
         </div>
-        <div className={classes.wrapper}>
-          <span>{price}</span>
-          <Button onClick={addItemHandler}>Add TO CART</Button>
-        </div>
-      </div>
+      </Link>
     </li>
   );
 };
