@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
 import AvailableItem from "./components/Items/AvailableItem";
 import Header from "./components/Layout/Header";
@@ -10,10 +10,12 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
 import ProductDetail from "./pages/ProductDetails";
+import Auth from "./pages/Auth";
+import AuthContext from "./store/auth-context";
 
 function App() {
   const [showCart, setShowCart] = useState(false);
-
+  const authCtx = useContext(AuthContext)
   const showCartHandler = () => {
     setShowCart(true);
   };
@@ -51,11 +53,12 @@ function App() {
       <Header onShowCart={showCartHandler} />
       <main>
         <Switch>
-          <Route path="/home">
+          <Route path="/" exact>
             <Home />
           </Route>
           <Route path="/store" exact>
-            <AvailableItem />
+          {authCtx.isLoggedIn &&  <AvailableItem />}
+          {!authCtx.isLoggedIn && <Redirect to='/login' />}
           </Route>
           <Route path="/store/:productDetails">
             <ProductDetail />
@@ -63,8 +66,12 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/contact-us">
-            <ContactUs onAddUserQuery={userQueryHandler} />
+          <Route path='/login'>
+            <Auth />
+          </Route>
+           <Route path="/contact-us">
+           {authCtx.isLoggedIn && <ContactUs onAddUserQuery={userQueryHandler} />}
+           {!authCtx.isLoggedIn && <Redirect to="/login"/>}
           </Route>
         </Switch>
       </main>

@@ -14,21 +14,25 @@ const Items = (props) => {
   };
 
   return (
-    <li key={props.data.id} id={props.id}>
-      <Link style={{ textDecoration: 'none' }}
-        to={{ pathname: "store/productDetails", state: { data: props.data} }}
-      >
-        <div className={classes.container}>
-          <div>
+    <li key={props.id} id={props.id}>
+      <div className={classes.container}>
+        <div>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={{
+              pathname: "store/productDetails",
+              state: { data: props.data },
+            }}
+          >
             <h3>{props.data.title}</h3>
             <img src={props.data.imageUrl} alt="items images " />
-          </div>
-          <div className={classes.wrapper}>
-            <span>{price}</span>
-            <Button onClick={addItemHandler}>Add TO CART</Button>
-          </div>
+          </Link>
         </div>
-      </Link>
+        <div className={classes.wrapper}>
+          <span>{price}</span>
+          <Button onClick={addItemHandler}>Add TO CART</Button>
+        </div>
+      </div>
     </li>
   );
 };

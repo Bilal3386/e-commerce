@@ -6,15 +6,15 @@
   display: block;
 }
 
-.about h2 {
-  font-family: "Metal Mania";
-  text-align: center;
-  font-size: 30px;
-}
-
 .wrapper {
-  padding: 0 20%;
-  justify-content: center;
+  display: block;
+  width: 50%;
+  margin: 5rem auto;
+  box-shadow: 0 0 1px 1px rgb(211, 210, 210);
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px 1rem;
+  justify-content: flex-start;
 }
 
 .wrapper img {

@@ -9,7 +9,7 @@ const ModalOverlay = props => {
   </div>;
 };
 const Model = props => {
-  return ReactDOM.createPortal(<ModalOverlay nClose={props.onClose}>{props.children}</ModalOverlay>, document.getElementById('overlay-root'))
+  return ReactDOM.createPortal(<ModalOverlay onClose={props.onClose}>{props.children}</ModalOverlay>, document.getElementById('overlay-root'))
 
 };
 

@@ -1,11 +1,11 @@
 import React from "react";
-import classes from './AvailableItem.module.css'
+import classes from "./AvailableItem.module.css";
 import Items from "./Items";
 
 const AvailableItem = () => {
   const productsArr = [
     {
-      id: 'm1',
+      id: "m1",
       title: "Colors",
       price: 100,
       imageUrl:
@@ -13,7 +13,7 @@ const AvailableItem = () => {
     },
 
     {
-      id: 'm2',
+      id: "m2",
       title: "Black and white Colors",
       price: 50,
       imageUrl:
@@ -21,7 +21,7 @@ const AvailableItem = () => {
     },
 
     {
-      id: 'm3',
+      id: "m3",
       title: "Yellow and Black Colors",
       price: 70,
       imageUrl:
@@ -29,7 +29,7 @@ const AvailableItem = () => {
     },
 
     {
-      id: 'm4',
+      id: "m4",
       title: "Blue Color",
       price: 100,
       imageUrl:
@@ -37,13 +37,20 @@ const AvailableItem = () => {
     },
   ];
 
-  const listItems = productsArr.map(item => (
-    <Items data={item} />
-  ))
+  const listItems = productsArr.map((item) => (
+    <ul>
+      <Items data={item} />
+    </ul>
+  ));
 
-  return <ul className={classes.container}>
-  {listItems}
-  </ul>;
+  return (
+    <section className={classes.wrapper}>
+      <h2>STORE</h2>
+      <div className={classes.container}>
+      {listItems}
+      </div>
+    </section>
+  );
 };
 
 export default AvailableItem;

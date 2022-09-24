@@ -2,7 +2,7 @@
   display: block;
 }
 
-.control {
+.login-form {
   display: block;
   margin: 5rem auto;
   width: 30%;
@@ -12,27 +12,23 @@
   padding: 20px 1rem;
 }
 
-.control label {
+.login-form input {
+  width: 100%;
+  border-radius: 12px;
+  padding: 0.5rem;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.login-form label {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
   text-align: left;
 }
 
-.control input,
-.control textarea {
-  display: block;
-  width: 100%;
-  font: inherit;
-  padding: 0.5rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-}
-
-.control input:focus,
-.control textarea:focus {
+.login-form input:focus {
   outline: none;
   border-color: #230052;
 }
-

@@ -55,7 +55,9 @@ const Home = () => {
   return (
     <section className={classes.home}>
       <h2>TOURS</h2>
+      <div className={classes.wrapper}>
       {list}
+      </div>
     </section>
   );
 };

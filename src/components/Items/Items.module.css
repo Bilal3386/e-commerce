@@ -1,14 +1,16 @@
  .container {
     width: 100%;
-    margin: 30px;
+    margin: 0px 5rem;
  }
  
  .wrapper {
     display: flex;
-    justify-content:space-evenly;
-    margin: 0 100px;
+    width: 65%;
+    justify-content:space-between;
+    padding: 12px 0px;
  }
 
  .wrapper span {
     margin: 0;
+    justify-content: center;
  }
