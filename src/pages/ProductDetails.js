@@ -30,9 +30,9 @@ const ProductDetail = (props) => {
           ))}
         </div>
         <img
-          className={classes["product-img"]}
           src={data.imageUrl}
           alt="product-img"
+          className={classes["product-img"]}
         />
         <div className={classes["product-details"]}>
           <h1>{data.title}</h1>

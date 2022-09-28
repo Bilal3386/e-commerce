@@ -44,7 +44,8 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
+        authCtx.login(data.idToken, data.email);
+       // console.log(data)
         history.replace("/store");
       })
       .catch((err) => {

@@ -61,7 +61,8 @@ function App() {
           {!authCtx.isLoggedIn && <Redirect to='/login' />}
           </Route>
           <Route path="/store/:productDetails">
-            <ProductDetail />
+          {authCtx.isLoggedIn && <ProductDetail />}
+          {!authCtx.isLoggedIn && <Redirect to="/login"/>}
           </Route>
           <Route path="/about">
             <About />

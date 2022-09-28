@@ -5,10 +5,11 @@ import classes from "./HeaderCartButton.module.css";
 const HeaderCartButton = props => {
   const cartCtx = useContext(CartContext)
 
-  let quantity = 0 
+  let quantity = 0
+  
   cartCtx.items.forEach(item => 
     {
-      quantity=quantity+ Number(item.quantity)
+      quantity = quantity + Number(item.quantity)
     }
   )
 
