@@ -12,7 +12,7 @@ export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem('idToken')
   const initialEmail = localStorage.getItem('email')
   const [token, setToken] = useState(initialToken);
-  const [email, setEmail] = useState(initialEmail)
+  const [email, setEmail] = useState(initialEmail);
 
   const userLoggedIn = !!token;
 

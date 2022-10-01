@@ -7,13 +7,13 @@ const CartProvider = (props) => {
   const authCtx = useContext(AuthContext);
   const [items, updatedItems] = useState([]);
   console.log(items)
-
+ const [quantity, setQuantity] = useState(0)
   const addItemsToCartHandler = async (product) => {
     console.log(product)
 
     const userEmailId = authCtx.email.split(".").join("");
     const cleanEmail = userEmailId.split("@").join("");
-    const url = `https://crudcrud.com/api/7e9d27647369489e8d020117ed4609c6/cart${cleanEmail}`;
+    const url = `https://crudcrud.com/api/1da26a23c386416da5a73b9c06f3c606/cart${cleanEmail}`;
 
     const newArray = [...items]
     console.log(newArray)
@@ -58,9 +58,8 @@ const CartProvider = (props) => {
       //console.log([...updatedProduct])
       const res1 = await axios.put(url+`/${temp}`, updatedProduct)
       console.log(res1.data)
-      updatedItems([...items, updatedProduct])
+      updatedItems([updatedProduct])
     }
-      
       catch (err)
       {
         console.log(err)
@@ -152,12 +151,16 @@ const CartProvider = (props) => {
     //   updatedItems(newArray);
     //     };
       
+    const quantityHandler = quantity => {
+      setQuantity(quantity)
+    }
 
   const removeItemHandler = (id) => {};
 
   const cartItems = {
     items: items,
-    itemQuantity: 0,
+    quantity: quantity,
+    itemQuantity: quantityHandler,
     totalAmount: items.reduce((ack, item) => {
       return (ack += item.price * item.quantity);
     }, 0),

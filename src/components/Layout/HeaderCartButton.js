@@ -17,7 +17,7 @@ const HeaderCartButton = props => {
   return (
     <Fragment>
       <button className={classes.button} onClick={props.onClick}>
-        Cart <span className={classes.span}>{quantity}</span>
+        Cart <span className={classes.span}>{cartCtx.quantity}</span>
       </button>
     </Fragment>
   );
