@@ -13,7 +13,7 @@ const CartProvider = (props) => {
 
     const userEmailId = authCtx.email.split(".").join("");
     const cleanEmail = userEmailId.split("@").join("");
-    const url = `https://crudcrud.com/api/1da26a23c386416da5a73b9c06f3c606/cart${cleanEmail}`;
+    const url = `https://crudcrud.com/api/12cb9f3a8de64c88be37a109940785b4/cart${cleanEmail}`;
 
     const newArray = [...items]
     console.log(newArray)
@@ -29,7 +29,7 @@ const CartProvider = (props) => {
     if (idx === -1) {
       try{
       const res = await axios.post(url, product)
-      updatedItems([...items, product])
+      updatedItems([...newArray, product])
       console.log(res)
       }
       catch (err)
@@ -42,11 +42,11 @@ const CartProvider = (props) => {
       try{
         const res = await axios.get(url)
         const mapProduct = res.data.findIndex((item) => {
-          if(item.title === product.title)
+          if(item.id === product.id)
           {
             return product
           }
-        } )
+        return null} )
         console.log(res.data[mapProduct])
         console.log('items')
       console.log(idx)

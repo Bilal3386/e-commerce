@@ -43,7 +43,7 @@ const Cart = (props) => {
   const userEmailId = authCtx.email.split(".").join("");
   const cleanEmail = userEmailId.split("@").join("");
    const fetch = async () => {
-    const res = await axios.get(`https://crudcrud.com/api/1da26a23c386416da5a73b9c06f3c606/cart${cleanEmail}`)
+    const res = await axios.get(`https://crudcrud.com/api/12cb9f3a8de64c88be37a109940785b4/cart${cleanEmail}`)
   
     cartCtx.items = res.data
     const quantity = res.data.reduce((ack, item) =>{

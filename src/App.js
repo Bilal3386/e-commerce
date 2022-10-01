@@ -1,21 +1,24 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
-import AvailableItem from "./components/Items/AvailableItem";
 import Header from "./components/Layout/Header";
+import Spinner from "react-bootstrap/Spinner";
 import Footer from "./components/Layout/Footer";
 import classes from "./App.module.css";
 import CartProvider from "./store/CartProvider";
-import About from "./pages/About";
-import Home from "./pages/Home";
-import ContactUs from "./pages/ContactUs";
-import ProductDetail from "./pages/ProductDetails";
-import Auth from "./pages/Auth";
 import AuthContext from "./store/auth-context";
 
+const Home = React.lazy(() => import("./pages/Home"));
+const AvailableItem = React.lazy(() =>
+  import("./components/Items/AvailableItem")
+);
+const ProductDetail = React.lazy(() => import("./pages/ProductDetails"));
+const ContactUs = React.lazy(() => import("./pages/ContactUs"));
+const About = React.lazy(() => import("./pages/About"));
+const Auth = React.lazy(() => import("./pages/Auth"));
 function App() {
   const [showCart, setShowCart] = useState(false);
-  const authCtx = useContext(AuthContext)
+  const authCtx = useContext(AuthContext);
   const showCartHandler = () => {
     setShowCart(true);
   };
@@ -52,29 +55,47 @@ function App() {
       {showCart && <Cart onClose={hiddenCartHandler} />}
       <Header onShowCart={showCartHandler} />
       <main>
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/store" exact>
-          {authCtx.isLoggedIn &&  <AvailableItem />}
-          {!authCtx.isLoggedIn && <Redirect to='/login' />}
-          </Route>
-          <Route path="/store/:productDetails">
-          {authCtx.isLoggedIn && <ProductDetail />}
-          {!authCtx.isLoggedIn && <Redirect to="/login"/>}
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path='/login'>
-            <Auth />
-          </Route>
-           <Route path="/contact-us">
-           {authCtx.isLoggedIn && <ContactUs onAddUserQuery={userQueryHandler} />}
-           {!authCtx.isLoggedIn && <Redirect to="/login"/>}
-          </Route>
-        </Switch>
+        <Suspense
+          fallback={
+            <Spinner
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              animation="border"
+              role="status"
+            >
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          }
+        >
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/store" exact>
+              {authCtx.isLoggedIn && <AvailableItem />}
+              {!authCtx.isLoggedIn && <Redirect to="/login" />}
+            </Route>
+            <Route path="/store/:productDetails">
+              {authCtx.isLoggedIn && <ProductDetail />}
+              {!authCtx.isLoggedIn && <Redirect to="/login" />}
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/login">
+              <Auth />
+            </Route>
+            <Route path="/contact-us">
+              {authCtx.isLoggedIn && (
+                <ContactUs onAddUserQuery={userQueryHandler} />
+              )}
+              {!authCtx.isLoggedIn && <Redirect to="/login" />}
+            </Route>
+          </Switch>
+        </Suspense>
       </main>
       <div className={classes["footer-container"]}>
         <Footer />
