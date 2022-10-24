@@ -1,6 +1,25 @@
-.button {
+.container {
     position: absolute;
     right: 2%;
+}
+
+.logout {
+    font: inherit;
+  background-color: transparent;
+  color: white;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 18px;
+  padding: 0 1rem;
+  margin: 0 0.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+.logout:hover{
+    color: black;
+    background-color: white;
+}
+.button {
     border: 2px solid deepskyblue;
     background-color: transparent;
     color: white;

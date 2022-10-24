@@ -1,10 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 import HeaderBottom from "./HeaderBottom";
+import AuthContext from "../../store/auth-context";
+
 
 const Header = (props) => {
+  const authCtx = useContext(AuthContext)
+  const isLogin = authCtx.isLoggedIn
   return (
     <Fragment>
       <header className={classes.header}>
@@ -17,13 +21,14 @@ const Header = (props) => {
         <NavLink activeClassName={classes.active} to="/about">
           ABOUT
         </NavLink>
-        <NavLink activeClassName={classes.active} to="/login">
+        {!isLogin && <NavLink activeClassName={classes.active} to="/login">
           LOGIN
-        </NavLink>
-        <NavLink activeClassName={classes.active} to="/contact-us">
+        </NavLink>}
+        {isLogin &&<NavLink activeClassName={classes.active} to="/contact-us">
           CONTACT-US
-        </NavLink>
-        <HeaderCartButton onClick={props.onShowCart} />
+        </NavLink>}
+        {isLogin && <HeaderCartButton onClick={props.onShowCart} />}
+        
       </header>
       <HeaderBottom />
     </Fragment>

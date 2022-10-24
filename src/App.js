@@ -57,17 +57,19 @@ function App() {
       <main>
         <Suspense
           fallback={
-            <Spinner
+            <div className={classes.spinner}>
+              <Spinner
               style={{
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                textAlign: 'center',
               }}
               animation="border"
               role="status"
             >
               <span className="visually-hidden">Loading...</span>
             </Spinner>
+            </div>
+            
           }
         >
           <Switch>

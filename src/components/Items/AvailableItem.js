@@ -38,7 +38,7 @@ const AvailableItem = () => {
   ];
 
   const listItems = productsArr.map((item) => (
-    <ul>
+    <ul key={item.id}>
       <Items data={item} />
     </ul>
   ));

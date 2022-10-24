@@ -1,19 +1,70 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../store/auth-context";
+import React, { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import Button from "../UI/Button";
 import Model from "../UI/Model";
 import classes from "./Cart.module.css";
 import CartCloseButton from "./CartCloseButton";
 import CartItems from "./CartItems";
+import Spinner from "react-bootstrap/Spinner";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
-  const authCtx = useContext(AuthContext);
- const [list, setList] = useState([])
   
-  // const cartElements = [
+ 
+  
+  
+       
+    
+  // },[authCtx.email, cartCtx] )
+  
+
+  console.log(cartCtx.totalAmount)
+ 
+  const cartItemsList = cartCtx.items.map((item) => (
+    <ul key={item.id} className={classes.ul}>
+     {item && <CartItems  product={item} />}
+    </ul>
+  ));
+
+  return (
+    <Model onClose={props.onClose}>
+      <CartCloseButton className={classes.close} onClose={props.onClose} />
+      <div className={classes.total}>
+        <h2>Cart</h2>
+        <div className={classes.wrapper}>
+          <span className={classes.item}>ITEM</span>
+          <span className={classes.price}>PRICE</span>
+          <span className={classes.quantity}>QUANTITY</span>
+        </div>
+        {!cartCtx.loader && <Spinner
+              style={{
+                 height: '2rem',
+                 width: '2rem',
+                 margin: '1rem auto',
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              animation="border"
+              role="status"
+            >
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>}
+        {cartCtx.loader && <div>
+          {cartItemsList}
+          <span className={classes["cart-total"]}>
+          <span>${cartCtx.totalAmount}</span>
+            <strong>Total</strong>
+          </span>
+        </div>}
+        {cartCtx.loader && <Button>Purchase</Button>}
+      </div>
+    </Model>
+  );
+};
+
+export default Cart;
+
+// const cartElements = [
   //   {
   //     title: "Colors",
   //     price: 100,
@@ -39,24 +90,24 @@ const Cart = (props) => {
   //   },
   // ];
 
-  useEffect(() => {
-  const userEmailId = authCtx.email.split(".").join("");
-  const cleanEmail = userEmailId.split("@").join("");
-   const fetch = async () => {
-    const res = await axios.get(`https://crudcrud.com/api/12cb9f3a8de64c88be37a109940785b4/cart${cleanEmail}`)
+  // useEffect(() => {
+  // const userEmailId = authCtx.email.split(".").join("");
+  // const cleanEmail = userEmailId.split("@").join("");
+  //  const fetch = async () => {
+  //   const res = await axios.get(`https://crudcrud.com/api/12cb9f3a8de64c88be37a109940785b4/cart${cleanEmail}`)
   
-    cartCtx.items = res.data
-    const quantity = res.data.reduce((ack, item) =>{
-      return ack + item.quantity
-  }, 0)
-  cartCtx.itemQuantity(quantity)
-    // cartCtx.itemQuantity = 
-    setList(res.data)
-    console.log(cartCtx.itemQuantity)
-    console.log(cartCtx.items)
-   }
+  //   cartCtx.items = res.data
+  //   const quantity = res.data.reduce((ack, item) =>{
+  //     return ack + item.quantity
+  // }, 0)
+  // cartCtx.itemQuantity(quantity)
+  //   // cartCtx.itemQuantity = 
+  //   setList(res.data)
+  //   console.log(cartCtx.itemQuantity)
+  //   console.log(cartCtx.items)
+  //  }
 
-   fetch()
+  //  fetch()
   // fetch(
   //   `https://crudcrud.com/api/bdb298c082bb44b991688362e187c0fa/cart${cleanEmail}`
   // )
@@ -77,41 +128,3 @@ const Cart = (props) => {
   // .catch((err) => {
   //   alert(err);
   // });
-  
-       
-    
-  },[authCtx.email, cartCtx] )
-  
-  
-  const totalAmount = cartCtx.totalAmount.toFixed(2);
-  console.log(cartCtx.items)
-  const cartItemsList = list.map((item) => (
-    <ul className={classes.ul}>
-      <CartItems product={item} />
-    </ul>
-  ));
-
-  return (
-    <Model onClose={props.onClose}>
-      <CartCloseButton className={classes.close} onClose={props.onClose} />
-      <div className={classes.total}>
-        <h2>Cart</h2>
-        <div className={classes.wrapper}>
-          <span className={classes.item}>ITEM</span>
-          <span className={classes.price}>PRICE</span>
-          <span className={classes.quantity}>QUANTITY</span>
-        </div>
-        <div>
-          {cartItemsList}
-          <span className={classes["cart-total"]}>
-            <span>${totalAmount}</span>
-            <strong>Total</strong>
-          </span>
-        </div>
-        <Button>Purchase</Button>
-      </div>
-    </Model>
-  );
-};
-
-export default Cart;

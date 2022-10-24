@@ -25,6 +25,9 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = () => {
     setToken(null);
+    setEmail(null)
+    localStorage.removeItem('idToken')
+    localStorage.removeItem('email')
   };
 
   const contextValue = {

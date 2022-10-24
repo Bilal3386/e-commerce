@@ -10,7 +10,6 @@ const ModalOverlay = props => {
 };
 const Model = props => {
   return ReactDOM.createPortal(<ModalOverlay onClose={props.onClose}>{props.children}</ModalOverlay>, document.getElementById('overlay-root'))
-
 };
 
 export default Model;
